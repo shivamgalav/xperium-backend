@@ -10,8 +10,7 @@ CORS(app)
 
 def insertDocument(obj):
     contact = obj
-    collection.insert_one(contact).inserted_id
-
+    contact_id = collection.insert_one(contact).inserted_id
 
 def readDocuments():
     contacts = collection.find({})
@@ -21,7 +20,7 @@ def readDocuments():
 
 
 def updateDocuments(obj):
-    collection.update_one({'id':obj['contact_id']},{'$set':{"name":obj["update"]["name"]}})
+    collection.update_one({'id':obj['contact_id']},{'$set':obj['update']})
 
 
 def deleteDocuments(obj):
@@ -39,6 +38,7 @@ def addContact():
     if request.method=='POST':
         obj = request.get_json()
         insertDocument(obj)
+        return "added successfully"
 
 @app.route('/update', methods=['GET', 'POST'])
 def update():
