@@ -53,7 +53,7 @@ def delete():
     if request.method=='POST':
         obj = request.get_json()
         deleteDocuments(obj)
-        return 'delted successfully'
+        return 'deleted successfully'
 
 
 if __name__ == "__main__":
